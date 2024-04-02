@@ -24,11 +24,11 @@ limit 10;
 select EmployeeName, (BasePay + OvertimePay + OtherPay)/3 as "Average pay" from salaries;
 
 
--- Employees who have the word "Manager" in thier job title
+-- Employees who have the word "Manager" in their job title
 select EmployeeName, JobTitle from salaries where JobTitle like '%MANAGER%';
 
--- Employees who DONT'T have the word "Manager" in thier job title
-select EmployeeName, JobTitle from salaries where JobTitle != 'MANAGER';
+-- Employees who DON'T have the word "Manager" in their job title
+select EmployeeName, JobTitle from salaries where JobTitle NOT LIKE 'MANAGER';
 
 -- Employees with a total pay between 50,000 and 75,000
 select * from salaries 
@@ -44,7 +44,7 @@ where TotalPayBenefits between 125000 and 150000
 and JobTitle like '%DIRECTOR%';
 
 
--- Employees ordered by thier totalpay benefits in descending order
+-- Employees ordered by their totalpay benefits in descending order
 select EmployeeName, TotalPayBenefits from salaries 
 order by TotalPayBenefits desc;
 
@@ -56,13 +56,13 @@ having AvgBasePay >= 100000
 order by AvgBasePay desc;
 
 
--- delete notes and status column from table
+-- Delete notes and status column from table
 alter table salaries
 drop column Notes,
 drop column Status;
 select * from salaries;
 
-	-- Update the base pay of all employees with the job title containing "Manager" by increasing it by 10%
+-- Update the base pay of all employees with the job title containing "Manager" by increasing it by 10%
 update salaries
 set BasePay = BasePay * 1.1
 where JobTitle like "%Manager%"
